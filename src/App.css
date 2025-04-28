@@ -1,0 +1,10 @@
+@import "tailwindcss";
+section {
+  font-family: "Josefin Sans", sans-serif;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+:root {
+  --tw-color-format: rgb;
+}

@@ -1,0 +1,259 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
+
+    body {
+      font-family: 'Josefin Sans', sans-serif;
+      margin: 0;
+      padding: 0;
+      font-size: 14px;
+      color: #000;
+      background-color: #fff;
+    }
+
+    @page {
+      size: A4;
+      margin: 20mm;
+    }
+    .page {
+  padding: 20px;
+  box-sizing: border-box;
+  border: 1px solid #000; /* darker visible border */
+  margin: 10px auto;      /* centers the page and adds space */
+  min-height: 297mm;
+  page-break-after: always;
+  position: relative;
+}
+
+    .last-page {
+      page-break-after: auto;
+    }
+
+    .w-full { width: 100%; }
+    .m-auto { margin: auto; }
+    .p-4 { padding: 1rem; }
+    .rounded-lg { border-radius: 0.5rem; }
+    .text-center { text-align: center; }
+    .text-left { text-align: left; }
+    .text-base { font-size: 1rem; }
+    .text-lg { font-size: 1.25rem; }
+    .text-xl { font-size: 1.5rem; }
+    .text-2xl { font-size: 1.75rem; }
+    .text-md { font-size: 1.10rem; }
+    .text-sm { font-size: 0.9rem; }
+    .font-bold { font-weight: bold; }
+    .capitalize { text-transform: capitalize; }
+    .mt-1 { margin-top: 0.25rem; }
+    .mt-2 { margin-top: 0.5rem; }
+    .mt-4 { margin-top: 1rem; }
+    .mt-6 { margin-top: 1.5rem; }
+    .mb-6 { margin-bottom: 1.5rem; }
+    .flex { display: flex; }
+    .flex-col { flex-direction: column; }
+    .md-flex-row { flex-direction: row; }
+    .justify-between { justify-content: space-between; }
+    .justify-end { justify-content: flex-end; }
+    .gap-4 { gap: 1rem; }
+    .overflow-x-auto { overflow-x: auto; }
+    .underline { text-decoration: underline; }
+    .list-disc { list-style-type: disc; padding-left: 1.5rem; }
+    .page-break { page-break-before: always; break-before: page; }
+    .w-20 { width: 5rem; }
+    .h-20 { height: 5rem; }
+    .object-cover { object-fit: cover; }
+    .rounded-full { border-radius: 9999px; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1.5rem;
+    }
+
+    th, td {
+      border: 1px solid #d1d5db;
+      padding: 0.75rem;
+      text-align: center;
+    }
+
+    thead {
+      background-color: #f3f4f6;
+    }
+
+    .footer-note {
+      position: absolute;
+      bottom: 20px;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      font-size: 0.85rem;
+      font-style: italic;
+    }
+
+    .content-box {
+      padding: 20px;
+      margin-bottom: 40px;
+      /* border: 1px solid red; */
+    }
+
+    hr {
+      border: 0;
+      height: 1px;
+      background-color: #d1d5db;
+      margin: 1.5rem 0;
+    }
+
+    /* Logo solution with base64 fallback */
+    .logo-container {
+      width: 5rem;
+      height: 5rem;
+      margin: 0 auto;
+      /* border-radius: 9999px; */
+      background-color: #f3f4f6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      /* overflow: hidden; */
+    }
+    
+    .logo-img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Invoice Page -->
+  <div class="page">
+    <div class="content-box">
+
+      <!-- Logo and Header -->
+      <div class="text-center">
+        <div class="logo-container">
+          <img src="{{ logo_url }}" alt="Logo" style="width: 150px; height: auto; display: block; margin: 0 auto;">
+        </div>
+        <h1 class="font-bold text-2xl mt-2 capitalize">Vetri</h1>
+        <h2 class="text-black font-bold text-xl capitalize">Technology Solutions</h2>
+      </div>
+
+      <!-- Title -->
+      <h1 class="text-center mt-6 text-2xl font-bold underline">
+        IT Training Fees Payment Invoice
+      </h1>
+
+      <!-- Invoice Details -->
+      <div class="mt-4">
+        <p><span class="font-bold text-md">Invoice Number:</span> {{ enrollment.id }}</p>
+        <p class="mt-1"><span class="font-bold">Date:</span> {{ invoice_date }}</p>
+      </div>
+
+      <hr>
+
+      <!-- Bill From / To -->
+      <div class="flex flex-col md-flex-row justify-between gap-4">
+        <div>
+          <h2 class="font-bold text-lg">Bill From:</h2>
+          <p class="mt-1"><span class="font-bold">GST No:</span> 33FGPP6566F1Z9</p>
+          <p>Vetri Technology Solutions</p>
+          <p>Old Ward No 17, 1-9-140/29, Sivagurunathapuram, Surandai,</p>
+          <p>Tenkasi, Tamil Nadu - 627859</p>
+          <p class="mt-2">Phone: 8438164827 / 8438781327</p>
+        </div>
+        <div>
+          <h2 class="font-bold text-lg">Bill To:</h2>
+          <p class="mt-1"><span class="font-bold">GST No:</span> {{ enrollment.gst_number }}</p>
+          <p>{{ enrollment.name }}</p>
+          <p>{{ enrollment.email }}</p>
+          <p>{{ enrollment.mobile }}</p>
+        </div>
+      </div>
+
+      <!-- Table -->
+      <div class="overflow-x-auto">
+        <table>
+          <thead>
+            <tr>
+              <th>Course Name</th>
+              <th>Duration</th>
+              <th>Price</th>
+              <th>GST (18%)</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="capitalize">{{ enrollment.course.name }}</td>
+              <td>{{ enrollment.course.days }} Days</td>
+              <td>&#8377;{{ enrollment.base_amount }}</td>
+              <td>&#8377;{{ enrollment.gst_amount }}</td>
+              <td class="font-bold">&#8377;{{ enrollment.total_amount }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Totals -->
+      <div class="w-full flex justify-end mt-6">
+        <div class="text-right">
+          <p class="text-xl font-bold">GST (18%): &#8377;{{ enrollment.gst_amount }}</p>
+          <p class="text-xl font-bold mt-2">Total Paid: &#8377;{{ enrollment.total_amount }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer-note">
+      * This is a system generated invoice, signature not required. *
+    </div>
+  </div>
+
+  <!-- Terms and Conditions -->
+  <div class="page last-page">
+    <div class="content-box">
+      <h2 class="text-center text-2xl font-bold underline mb-6">Terms and Conditions</h2>
+
+      <h3 class="font-bold text-xl mt-4">Refund & Returns Policy</h3>
+      <ul class="list-disc text-base mt-2">
+        <li>No refunds or returns are applicable after course enrollment and successful payment.</li>
+        <li>Refund only if candidate is not allocated to any training program after payment.</li>
+        <li>Please review course details carefully before making payment.</li>
+      </ul>
+
+      <h3 class="font-bold text-xl mt-4">Cancellation Policy</h3>
+      <ul class="list-disc text-base mt-2">
+        <li>No cancellations allowed after payment is made.</li>
+        <li>Enrollments are final and non-transferable.</li>
+      </ul>
+
+      <h3 class="font-bold text-xl mt-4">Terms & Conditions</h3>
+      <ul class="list-disc text-base mt-2">
+        <li>By enrolling, you agree to all Vetri Technology Solutions terms and conditions.</li>
+        <li>Training is provided via chosen mode: online, offline, WFH, or WFO.</li>
+        <li>Post-payment, schedules, materials, and offer details are shared with you.</li>
+        <li>Communication is via your registered email or phone.</li>
+      </ul>
+
+      <h3 class="font-bold text-xl mt-4">Privacy Policy</h3>
+      <ul class="list-disc text-base mt-2">
+        <li>Your privacy is important to us. We protect your personal data.</li>
+        <li>Info collected is used for training and placement purposes only.</li>
+        <li>We do not share your info without your consent.</li>
+        <li>Data is stored securely and per data protection laws.</li>
+      </ul>
+    </div>
+
+    <!-- Footer Note -->
+    <div class="footer-note">
+      * This is a system generated invoice, signature not required. *
+    </div>
+  </div>
+
+</body>
+
+</html>
