@@ -12,7 +12,6 @@ import ContactUs from "./components/ContactUs";
 import ImageSlider from "./components/ImageSlider";
 import PaymentDetails from "./components/PaymentDetails";
 import PaymentInvoice from "./components/PaymentInvoice";
-import Ex from "./components/ex";
 import VideoSection from "./components/VideoSection";
 import ScrollToTop from "./components/ScrollToTop";
 import PrivacyPolicy from "./components/PrivacyPolicy";
@@ -80,7 +79,6 @@ function App() {
 
       <Route path="payment-invoice" element={<PaymentInvoice/>}/>
 
-      <Route path="ex" element={<Ex />}/>
 
       <Route path="privacy-policy" element={<PrivacyPolicy />}/>
 
